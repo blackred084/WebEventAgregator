@@ -1,0 +1,179 @@
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+
+    <html lang="en" xmlns:th="http://www.thymeleaf.org">
+    <head>
+
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <meta name="description" content="">
+        <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
+        <meta name="generator" content="Jekyll v3.8.5">
+        <title>Starter Template · Bootstrap</title>
+
+        <link rel="canonical" href="https://getbootstrap.com/docs/4.3/examples/starter-template/">
+
+        <!-- Bootstrap core CSS -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.6/umd/popper.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js"></script>
+        <link href="/docs/4.3/dist/css/bootstrap.min.css" rel="stylesheet"
+              integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+              crossorigin="anonymous">
+
+
+        <!-- Custom styles for this template -->
+
+        <link type="text/css" href="registrationPageStyle.css" rel="stylesheet">
+
+        <!--    <link type="text/css" href="registrationPageStyle.css" rel="stylesheet">-->
+
+    </head>
+<body>
+<nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top">
+    <h4>Events.org</h4>
+
+    <div class="collapse navbar-collapse" id="navbarsExampleDefault">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item active">
+                <a href="/" class="nav-link">Home <span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item active">
+                <a href="/newEvent" class="nav-link">Add event <span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item active">
+                <a href="/userView" class="nav-link">Account <span class="sr-only"></span></a>
+            </li>
+        </ul>
+
+
+        <form th:action="@{/search}" class="form-inline">
+            <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+        </form>
+        <form class="form-inline my-2 my-lg-0">
+            <a href="/logout" type="submit" class="btn btn-danger btn-primary btn-block" role="button">Logout</a>
+        </form>
+    </div>
+</nav>
+<script>
+    var current_page = 1;
+    var records_per_page = 8;
+
+
+    function prevPage() {
+        if (current_page > 1) {
+            current_page--;
+            changePage(current_page);
+        }
+    }
+
+    function nextPage() {
+        if (current_page < numPages()) {
+            current_page++;
+            changePage(current_page);
+        }
+    }
+
+    function changePage(page) {
+        var btn_next = document.getElementById("btn_next");
+        var btn_prev = document.getElementById("btn_prev");
+        var listing_table = document.getElementById("listingTable");
+        var page_span = document.getElementById("page");
+
+        // Validate page
+        if (page < 1) page = 1;
+        if (page > numPages()) page = numPages();
+
+        listing_table.innerHTML = "";
+
+        for (var i = (page - 1) * records_per_page; i < (page * records_per_page); i++) {
+            listing_table.innerHTML += objJson[i].adName + "<br>";
+        }
+        page_span.innerHTML = page;
+
+        if (page == 1) {
+            btn_prev.style.visibility = "hidden";
+        } else {
+            btn_prev.style.visibility = "visible";
+        }
+
+        if (page == numPages()) {
+            btn_next.style.visibility = "hidden";
+        } else {
+            btn_next.style.visibility = "visible";
+        }
+    }
+
+    function numPages() {
+        return Math.ceil(objJson.length / records_per_page);
+    }
+
+    window.onload = function () {
+        changePage(1);
+    };
+</script>
+
+
+<main role="main" class="container">
+
+    <div class="starter-template">
+        <h1>Wydarzenia</h1>
+    </div>
+    <div class="container">
+
+        <h1 class="my-4">Event's
+        </h1>
+        <ul th:each="event : ${events}"> class="list-group">
+            <li th:text="${event.title}" class="list-group-item"></li>
+            <li th:text="${event.startDate}" class="list-group-item list-group-item-primary"></li>
+            <li th:text="${event.endDate}" class="list-group-item list-group-item-secondary"></li>
+            <li th:text="${event.description}" class="list-group-item list-group-item-success"></li>
+        </ul>
+
+
+        <div id="ss">
+            <ul class="pagination justify-content-center">
+                <li class="page-item">
+                    <a class="page-link" href="#" aria-label="Previous">
+                        <span aria-hidden="true">&laquo;</span>
+                        <span class="sr-only" onclick="prevPage()">Previous</span>
+                    </a>
+                </li>
+                <li class="page-item">
+                    <a class="page-link" onclick="changePage(1)" href="#">1</a>
+                </li>
+                <li class="page-item">
+                    <a class="page-link" onclick="changePage(2)" href="#">2</a>
+                </li>
+                <li class="page-item">
+                    <a class="page-link" onclick="changePage(3)" href="#">3</a>
+                </li>
+                <li class="page-item">
+                    <a class="page-link" href="#" aria-
+                       label="Next">
+                        <span aria-hidden="true">&raquo;</span>
+                        <span class="sr-only" onclick="nextPage()">Next</span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+    </div>
+</main>
+
+
+</body>
+<style>
+
+    .pagination a {
+        border-bottom: none;
+    }
+
+    body {
+
+        background: linear-gradient(to right, #aab1b6, #dedde1);
+    }
+</style>
+</html>

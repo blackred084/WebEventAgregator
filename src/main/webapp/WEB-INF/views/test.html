@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<ul th:each="event : ${events}">
+    <li th:text="${event.id}"></li>
+    <li th:text="${event.title}"></li>
+    <li th:text="${event.description}"></li>
+    <li th:text="${event.startDate}"></li>
+    <li th:text="${event.endDate}"></li>
+</ul>
+</body>
+</html>

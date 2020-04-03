@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Bootstrap Example</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.6/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js"></script>
+    <link href="loginStyle.css" rel="stylesheet">
+</head>
+<body>
+<nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top">
+    <h4>Events.org</h4>
+
+    <div class="collapse navbar-collapse" id="navbarsExampleDefault">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item active">
+                <a href="/" class="nav-link">Home <span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item active">
+                <a href="/newEvent" class="nav-link">Add event <span class="sr-only">(current)</span></a>
+            </li>
+        </ul>
+        <form class="form-inline my-2 my-lg-0">
+            <a href="/login" type="submit" class="btn btn-dark btn-primary btn-block" role="button">Sign in</a>
+        </form>
+    </div>
+</nav>
+
+<form th:action="@{/newEvent}" method="post" class="form-control">
+<div class="container">
+    <p>
+    </p>
+    <p></p>
+    <h2>Add new event:</h2>
+        <div class="form-group">
+            <div class="form-group">
+                <label for="start">Start date:</label>
+                <input type="date" id="start" name="start"
+                       value="2018-07-22"
+                       min="2018-01-01" max="2018-12-31">
+                <label for="start">End date:</label>
+
+                <input type="date" id="end" name="end"
+                       value="2018-07-22"
+                       min="2018-01-01" max="2018-12-31">
+                <p></p>
+
+                <div class="form-label-group">
+                    <label for="tag">Tag</label>
+                    <input type="text" class="form-control" id="tag" name="tag" required>
+                </div>
+                <div class="form-label-group">
+                    <label for="tittle">Event tittle:</label>
+                    <input type="text" class="form-control" id="tittle" name="tittle" required>
+                </div>
+                <label for="comment">Event description:</label>
+                <textarea class="form-control" rows="7" id="comment" name="comment">
+                </textarea>
+                <button  type="submit" class="btn btn-dark btn-primary btn-block" role="button">Apply</button>
+            </div>
+        </div>
+</div>
+</form>
+</body>
+<style>
+    html,
+    body {
+        height: 100%;
+    }
+
+    body {
+
+        display: -ms-flexbox;
+        display: flex;
+        -ms-flex-align: center;
+        align-items: center;
+        padding-top: 40px;
+        padding-bottom: 40px;
+        background: linear-gradient(to right, #aab1b6, #dedde1);
+    }
+
+</style>
+</html>
